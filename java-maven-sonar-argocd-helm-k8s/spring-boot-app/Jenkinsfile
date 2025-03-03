@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout'){
+            step{
+                git branch: 'master', url: 'https://github.com/priyankagiri812/CICDProject.git'
+            }
+        }
+
+        stage('Build & Test'){
+            step{
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+            }
+        }
+    }
+}
