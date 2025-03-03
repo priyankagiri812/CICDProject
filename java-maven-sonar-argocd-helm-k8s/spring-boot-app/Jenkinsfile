@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout'){
-            step{
+        stage ('Checkout') {
+            steps {
                 git branch: 'master', url: 'https://github.com/priyankagiri812/CICDProject.git'
             }
         }
 
-        stage('Build & Test'){
-            step{
+        stage ('Build & Test') {
+            steps {
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
             }
         }
