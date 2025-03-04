@@ -23,15 +23,15 @@ pipeline {
             }
         }
 
-    stage('Static Code Analysis') {
-      steps {
-        withSonarQubeEnv('sonarqube') {
-           bat 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.projectKey=ultimate-CICD-Pipeline -Dsonar.host.url=http://192.168.0.101:9000'
-        }
-      }
-    }
+        stage('Static Code Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                bat 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.projectKey=ultimate-CICD-Pipeline -Dsonar.host.url=http://localhost:9000'
+           }
+            }
+       }
 
-    stage('Docker Build') {
+        stage('Docker Build') {
             steps {
                 dir('D:/Jenkins-Home/workspace/Ultimate-CICD-Pipeline/java-maven-sonar-argocd-helm-k8s/spring-boot-app/') {
                 script {
