@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven'
+        jdk 'openjdk'
     }
 
     environment {
@@ -29,5 +30,24 @@ pipeline {
         }
       }
     }
+
+    stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("priyankagiri123/ultimate-cicd-pipeline:${TAG}")
+                }
+            }
+        }
+	    stage('Pushing Docker Image to Dockerhub') {
+            steps {
+                script {
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        docker.image("priyankagiri123/ultimate-cicd-pipeline:${TAG}").push()
+                        docker.image("priyankagiri123/ultimate-cicd-pipeline:${TAG}").push("latest")
+                    }
+                }
+            }
+        }
+
     }
 }
