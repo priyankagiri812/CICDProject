@@ -1,5 +1,7 @@
 FROM adoptopenjdk/openjdk16:ubi
 
+LABEL maintainer="Priyanka Giri"
+
 ARG artifact=target/spring-boot-web.jar
 
 WORKDIR /opt/app
