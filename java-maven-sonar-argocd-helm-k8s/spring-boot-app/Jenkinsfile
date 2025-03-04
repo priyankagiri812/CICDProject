@@ -33,7 +33,7 @@ pipeline {
 
     stage('Docker Build') {
             steps {
-                dir('D:\Jenkins-Home\workspace\Ultimate-CICD-Pipeline\java-maven-sonar-argocd-helm-k8s\spring-boot-app') {
+                dir('D:/Jenkins-Home/workspace/Ultimate-CICD-Pipeline/java-maven-sonar-argocd-helm-k8s/spring-boot-app/') {
                 script {
                     docker.build("priyankagiri123/ultimate-cicd-pipeline:${TAG}")
                 }
