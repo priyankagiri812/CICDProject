@@ -37,26 +37,28 @@ pipeline {
                 script {
                     docker.build("priyankagiri123/ultimate-cicd-pipeline")
                 }
-            }
+              }
                 
             }
         }
 	    stage('Pushing Docker Image to Dockerhub') {
             steps {
-                dir('D:/Jenkins-Home/workspace/Ultimate-CICD-Pipeline/java-maven-sonar-argocd-helm-k8s/spring-boot-app/')
                 script {
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         docker.image("priyankagiri123/ultimate-cicd-pipeline").push()
                         docker.image("priyankagiri123/ultimate-cicd-pipeline").push("latest")
                     }
                 }
-            }
+                }
+            
         }
 
-        stage('Deploying App to Kubernetes') {
+    stage('Deploying App to Kubernetes') {
       steps {
+        dir('D:/Jenkins-Home/workspace/Ultimate-CICD-Pipeline/java-maven-sonar-argocd-helm-k8s/spring-boot-app/') {
         script {
           kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        }
         }
       }
     }
